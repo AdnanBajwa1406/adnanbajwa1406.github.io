@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Adnan Aslam | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px);
+            padding: 1rem 2rem; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--bg-tertiary);
+        }
+        .logo { font-size: 1.2rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 0 2rem;
+            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
+        }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.2; font-weight: 800; }
+        .hero-content h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 700px; margin-inline: auto; }
+        
+        .profile-photo {
+            width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
+            border: 4px solid var(--accent); box-shadow: 0 10px 30px var(--accent-glow);
+            margin-bottom: 1.5rem; display: block; margin-left: auto; margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block; padding: 0.8rem 2rem; border-radius: 50px;
+            background: var(--gradient); color: white; text-decoration: none;
+            font-weight: 600; transition: transform 0.3s, box-shadow 0.3s;
+            border: none; cursor: pointer; font-size: 1rem;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px var(--accent-glow); }
+        .btn-outline { background: transparent; border: 2px solid var(--accent); margin-left: 1rem; }
+        .btn-outline:hover { background: var(--accent); color: var(--bg-primary); }
+
+        /* Sections */
+        section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 2rem; margin-bottom: 3rem; text-align: center; position: relative; }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 3px; background: var(--gradient); border-radius: 2px;
+        }
+
+        /* About & Stats */
+        .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
+        .about-text { color: var(--text-secondary); font-size: 1.05rem; }
+        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        .stat-card {
+            background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px;
+            text-align: center; border: 1px solid var(--bg-tertiary); transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .stat-number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+        .stat-label { color: var(--text-secondary); font-size: 0.9rem; }
+
+        .research-photo-container { margin-top: 2rem; text-align: center; }
+        .research-photo {
+            width: 100%; max-width: 500px; border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); border: 2px solid var(--bg-tertiary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .research-photo:hover { transform: translateY(-5px); box-shadow: 0 12px 35px var(--accent-glow); border-color: var(--accent); }
+        .photo-caption { margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); font-style: italic; }
+
+        /* Parallel Layout */
+        .parallel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .col-title { font-size: 1.5rem; margin-bottom: 2rem; color: var(--accent); border-left: 4px solid var(--accent); padding-left: 1rem; }
+        
+        .timeline-item { position: relative; padding-left: 2rem; margin-bottom: 2.5rem; border-left: 2px solid var(--bg-tertiary); }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -7px; top: 5px;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--accent); border: 3px solid var(--bg-primary);
+        }
+        .timeline-date { color: var(--accent); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; }
+        .timeline-title { font-size: 1.2rem; margin-bottom: 0.3rem; font-weight: 600; }
+        .timeline-subtitle { color: var(--text-secondary); margin-bottom: 0.5rem; font-style: italic; font-size: 0.95rem; }
+        .timeline-desc { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* Skills */
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .skill-category { background: var(--bg-secondary); padding: 2rem; border-radius: 12px; border: 1px solid var(--bg-tertiary); }
+        .skill-category h3 { margin-bottom: 1.5rem; color: var(--accent); }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .skill-tag {
+            background: var(--bg-tertiary); padding: 0.5rem 1rem; border-radius: 20px;
+            font-size: 0.9rem; color: var(--text-primary); transition: background 0.3s;
+        }
+        .skill-tag:hover { background: var(--accent); color: var(--bg-primary); }
+
+        /* Research Footprint */
+        .footprint-container { text-align: center; }
+        .keyword-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
+        .keyword-btn {
+            background: var(--bg-secondary); border: 1px solid var(--bg-tertiary);
+            color: var(--text-secondary); padding: 0.6rem 1.5rem; border-radius: 30px;
+            cursor: pointer; font-size: 0.95rem; transition: all 0.3s ease; font-family: inherit;
+        }
+        .keyword-btn:hover { border-color: var(--accent); color: var(--text-primary); transform: translateY(-2px); }
+        .keyword-btn.active {
+            background: var(--gradient); color: white; border-color: transparent; box-shadow: 0 4px 15px var(--accent-glow);
+        }
+        .pub-list { display: flex; flex-direction: column; gap: 1.5rem; text-align: left; }
+        
+        /* Visual Break for Upcoming Articles */
+        .pub-divider {
+            display: flex; align-items: center; text-align: center; margin: 2rem 0 1rem 0;
+            color: var(--text-secondary); font-size: 1.1rem; font-weight: 600; letter-spacing: 1px;
+        }
+        .pub-divider::before, .pub-divider::after {
+            content: ''; flex: 1; border-bottom: 1px dashed var(--bg-tertiary);
+        }
+        .pub-divider span { padding: 0 1.5rem; color: var(--accent); }
+
+        .pub-item {
+            background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px;
+            border-left: 4px solid var(--accent); transition: all 0.3s ease;
+        }
+        .pub-item:hover { transform: translateX(5px); background: #253146; }
+        .pub-item.hidden { display: none; }
+        .pub-title { font-weight: 600; margin-bottom: 0.5rem; font-size: 1.05rem; }
+        .pub-authors { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .pub-journal { color: var(--accent); font-size: 0.9rem; font-style: italic; }
+        .pub-meta { display: flex; gap: 1rem; margin-top: 0.8rem; flex-wrap: wrap; }
+        .pub-badge { background: var(--bg-tertiary); padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.8rem; color: var(--text-primary); }
+        .pub-badge.q1 { background: rgba(56, 189, 248, 0.2); color: var(--accent); }
+
+        /* Contact */
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+        .contact-item { display: flex; align-items: center; gap: 1rem; }
+        .contact-icon {
+            width: 40px; height: 40px; background: var(--bg-secondary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.2rem;
+        }
+        .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-form input, .contact-form textarea {
+            background: var(--bg-secondary); border: 1px solid var(--bg-tertiary);
+            padding: 1rem; border-radius: 8px; color: var(--text-primary); font-family: inherit;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
+        .contact-form textarea { resize: vertical; min-height: 150px; }
+
+        footer { text-align: center; padding: 2rem; color: var(--text-secondary); border-top: 1px solid var(--bg-tertiary); margin-top: 3rem; }
+
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 900px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-grid, .contact-container, .parallel-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { display: none; }
+            .profile-photo { width: 140px; height: 140px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">M. Adnan Aslam</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#background">Background</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#footprint">Research Footprint</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <img src="images/profile.jpg" alt="Muhammad Adnan Aslam" class="profile-photo">
+            <h1>Muhammad Adnan Aslam<br><span>Condensed Matter Physicist</span></h1>
+            <p>Postdoctoral Researcher specializing in materials chemistry, electromagnetic wave absorption, electrochemical CO<sub>2</sub> reduction, and energy conversion.</p>
+            <div>
+                <a href="#contact" class="btn">Get in Touch</a>
+                <a href="#footprint" class="btn btn-outline">Explore Research</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="about-grid fade-in">
+            <div class="about-text">
+                <p>I have acquired extensive expertise in research, teaching, and lab management. On the research front, I have significant experience in condensed matter physics and materials chemistry, including the synthesis of morphology-controlled bio-carbon, transition metal oxides, and composites for electromagnetic wave absorption with ultrawide bandwidth.</p>
+                <br>
+                <p>Additionally, I work on electrochemical CO<sub>2</sub> reduction using solid-oxide electrolysis cells (SOECs), as well as electrochemical oxygen evolution (OER) and hydrogen evolution reactions (HER). During my recent Postdoctoral research, I have been co-supervising Master's students conducting SOEC/SOFC and electrochemical water-splitting research.</p>
+                
+                <div class="research-photo-container">
+                    <img src="images/research.jpg" alt="Current Research Work" class="research-photo">
+                    <p class="photo-caption">Current research on double perovskite-based reversible solid oxide cells and electrochemical CO<sub>2</sub> reduction at Shenzhen University</p>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">~95.9</div>
+                    <div class="stat-label">Total Impact Factor</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">h-index</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">716</div>
+                    <div class="stat-label">Total Citations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="background">
+        <h2 class="section-title fade-in">Academic & Professional Background</h2>
+        <div class="parallel-grid fade-in">
+            
+            <div class="education-col">
+                <h3 class="col-title">Education</h3>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Dec 2021</div>
+                    <div class="timeline-title">PhD Condensed Matter Physics</div>
+                    <div class="timeline-subtitle">University of Science and Technology of China (USTC), Hefei, CN</div>
+                    <div class="timeline-desc"><strong>Thesis:</strong> Structure and Dimensionality Modulated Microwave Absorption Properties in Biocarbon Based Materials.<br><strong>Supervisor:</strong> Prof. Sheng Zhigao</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Oct 2016</div>
+                    <div class="timeline-title">MS Nanotechnology</div>
+                    <div class="timeline-subtitle">University of the Punjab, Lahore, PK</div>
+                    <div class="timeline-desc"><strong>Thesis:</strong> Synthesis and Multiferroic Characterization of Ba-substituted SrMnO<sub>3</sub>.<br><strong>Supervisor:</strong> Prof. Shahid Atiq</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">July 2014</div>
+                    <div class="timeline-title">BS Physics</div>
+                    <div class="timeline-subtitle">Government College University Faisalabad, Faisalabad, PK</div>
+                    <div class="timeline-desc">Major Subjects: Solid State Physics, Quantum Mechanics, Electrodynamics, Nuclear Physics.</div>
+                </div>
+            </div>
+
+            <div class="experience-col">
+                <h3 class="col-title">Experience</h3>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">05/2024 – 08/2026</div>
+                    <div class="timeline-title">Postdoctoral Researcher</div>
+                    <div class="timeline-subtitle">Shenzhen University, Shenzhen, CN</div>
+                    <div class="timeline-desc">Research on double perovskite-based reversible solid oxide cells (Sr<sub>2</sub>Fe<sub>1.5</sub>Mo<sub>0.5</sub>O<sub>6-δ</sub>). Co-supervising Master's students in SOEC/SOFC research. Lexin Award recipient.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">07/2021 – 12/2023</div>
+                    <div class="timeline-title">Postdoctoral Researcher</div>
+                    <div class="timeline-subtitle">Institute of Solid-State Physics, HFIPS, Chinese Academy of Sciences</div>
+                    <div class="timeline-desc">Worked on size and efficiency-controlled upconversion nanoparticles for biosensing, and metal alloy-based microwave absorption nanoparticles. Project PI for HFIPS Fund.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">09/2016 – 09/2017</div>
+                    <div class="timeline-title">Lecturer, Physics Department</div>
+                    <div class="timeline-subtitle">Minhaj University Lahore, Lahore, PK</div>
+                    <div class="timeline-desc">Taught Mechanics, Electromagnetism, Electronics, Applied Physics, and Solid-state physics at graduate levels.</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">01/2016 – 09/2016</div>
+                    <div class="timeline-title">Research Assistant</div>
+                    <div class="timeline-subtitle">University of the Punjab, CSSP, Lahore, PK</div>
+                    <div class="timeline-desc">Frequency-dependent dielectric measurements using a 6500B impedance analyzer.</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title fade-in">Research & Technical Skills</h2>
+        <div class="skills-container fade-in">
+            <div class="skill-category">
+                <h3>Research Interests</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Nanoparticle Synthesis</span>
+                    <span class="skill-tag">Biomass Carbonization</span>
+                    <span class="skill-tag">EM Wave Absorption</span>
+                    <span class="skill-tag">CO<sub>2</sub> Reduction</span>
+                    <span class="skill-tag">Solid Oxide Cells</span>
+                    <span class="skill-tag">Water Splitting</span>
+                    <span class="skill-tag">Energy Storage</span>
+                    <span class="skill-tag">Composite Synthesis</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Technical Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Raman Spectrometer</span>
+                    <span class="skill-tag">Impedance Analyzer</span>
+                    <span class="skill-tag">FTIR Spectrometer</span>
+                    <span class="skill-tag">XAS Analysis</span>
+                    <span class="skill-tag">High Magnetic Field</span>
+                    <span class="skill-tag">SQUID Measurements</span>
+                    <span class="skill-tag">CHSI Analyzer</span>
+                    <span class="skill-tag">Magneto-assisted Synthesis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="footprint">
+        <h2 class="section-title fade-in">Research Footprint</h2>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Click a keyword below to filter my publications by research area.</p>
+        
+        <div class="footprint-container fade-in">
+            <div class="keyword-cloud">
+                <button class="keyword-btn active" data-filter="all">Show All</button>
+                <button class="keyword-btn" data-filter="co2">CO<sub>2</sub> Reduction & SOEC</button>
+                <button class="keyword-btn" data-filter="microwave">Microwave Absorption</button>
+                <button class="keyword-btn" data-filter="biocarbon">Bio-carbon & Biomass</button>
+                <button class="keyword-btn" data-filter="water">Water Splitting & OER/HER</button>
+                <button class="keyword-btn" data-filter="nano">Nanoparticles & Synthesis</button>
+                <button class="keyword-btn" data-filter="composite">Composites & Electrodes</button>
+            </div>
+
+            <div class="pub-list">
+                
+                <!-- ================= PUBLISHED ARTICLES (Descending Order) ================= -->
+                
+                <div class="pub-item" data-tags="co2 nano">
+                    <div class="pub-title">Unravelling the chemically constrained f-p-d stabilization of site-specific Ce-doped Sr<sub>2</sub>Fe<sub>1.5</sub>Mo<sub>0.5</sub>O<sub>6-δ</sub> for high-performance carbon dioxide reduction</div>
+                    <div class="pub-authors">M. A. Aslam, J. Liu, W. Zhang, Y. Liao, J. Liu, L. Wang, J. Zhang, X. Z. Fu, J. L. Luo</div>
+                    <div class="pub-journal">Journal of Materials Chemistry A, 2026</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 9.2</span><span class="pub-badge q1">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave biocarbon">
+                    <div class="pub-title">Dimensionality-driven sustainable biocarbon-based microwave absorbers: From bio-waste to functional materials</div>
+                    <div class="pub-authors">M. A. Aslam, R. Ahsen, Z. R. Usha, O. Iqbal, S. Ali, N. Li, Z. Wang</div>
+                    <div class="pub-journal">Next Materials, 8, 100584, 2025</div>
+                </div>
+
+                <div class="pub-item" data-tags="composite biocarbon">
+                    <div class="pub-title">Pulp waste extracted reinforced powder incorporated biodegradable chitosan composite film for enhancing red grape shelf-life</div>
+                    <div class="pub-authors">Z. R. Usha, O. Iqbal, M. A. Aslam, S. Ali, C. Liu, N. Li, S. Zhang, Z. Wang</div>
+                    <div class="pub-journal">Int. J. Biol. Macromol, 252, 126375, 2023</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 8.5</span><span class="pub-badge q1">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="nano">
+                    <div class="pub-title">A Synergistic Combination of AuNRs and CDots as a Multifunctional Material for Ice Recrystallization Inhibition and Rapid Rewarming</div>
+                    <div class="pub-authors">S. Ding, S. Ali, S. Zhang, J. Zhao, C. Liu, M. A. Aslam, X. Yu, M. Xi, L. Pan, N. Li, Z. Wang</div>
+                    <div class="pub-journal">ACS Omega, 8, 10466–10475, 2023</div>
+                    <div class="pub-meta"><span class="pub-badge">IF: 4.3</span><span class="pub-badge">Q2</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave biocarbon">
+                    <div class="pub-title">Magneto-orientated graphite double-layer homo-structure with broadband microwave absorption</div>
+                    <div class="pub-authors">J. S. Wang, W. Ding, C. H. Zhang, K. Qiu, Y. L. Gao, M. K. Chen, M. A. Aslam, M. A. Khalifa, J. L. Luo, J. Fang, Z. G. Sheng</div>
+                    <div class="pub-journal">Chinese Physics Letters, 40, 118101, 2023</div>
+                    <div class="pub-meta"><span class="pub-badge">IF: 4.7</span><span class="pub-badge">Q2</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave nano">
+                    <div class="pub-title">Tailoring the Morphology of CoNi Alloy by Static Magnetic Field for Electromagnetic Wave Absorption</div>
+                    <div class="pub-authors">M. A. Aslam, R. Ahsen, W. Uddin, S. ur Rehman, M. S. Khan, M. Bilal, N. Li, Z. Wang</div>
+                    <div class="pub-journal">European Physical Journal Plus, 137(4), 1-7, 2022</div>
+                    <div class="pub-meta"><span class="pub-badge">IF: 2.9</span><span class="pub-badge">Q2</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="nano">
+                    <div class="pub-title">Ammonium nitrate is a risk for environment: A case study of Beirut (Lebanon) chemical explosion and the effects on environment</div>
+                    <div class="pub-authors">S. ur Rehman, R. Ahmed, M. Kun, S. Xu, M. A. Aslam, B. Hong, J. Liu, J. Wang</div>
+                    <div class="pub-journal">Ecotoxicology and Environmental Safety, 210, 111834, 2021</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.1</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave biocarbon">
+                    <div class="pub-title">Low-cost 3D bio-carbon foams obtained from wheat straw with broadened bandwidth electromagnetic wave absorption performance</div>
+                    <div class="pub-authors">M. A. Aslam, W. Ding, S. ur Rehman, A. Hassan, Y. Bian, Q. Liu, Z. Sheng</div>
+                    <div class="pub-journal">Applied Surface Science, 543, 148785, 2021</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.9</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave biocarbon composite">
+                    <div class="pub-title">Dimensionality determined microwave absorption properties in Ferrite/Bio-carbon composites</div>
+                    <div class="pub-authors">M. A. Aslam, Hu Kang, W. Ding, A. Hassan, Y. Bian, K. Qiu, Q. Liu, Z. Sheng</div>
+                    <div class="pub-journal">Ceramics International, 47, 27496-27502, 2021</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.6</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave composite">
+                    <div class="pub-title">Modulating dielectric loss of MoS<sub>2</sub>@Ti<sub>3</sub>C<sub>2</sub>T<sub>x</sub> Nanoarchitectures for Electromagnetic Wave Absorption with radar cross section reduction</div>
+                    <div class="pub-authors">A. Hassan, M. A. Aslam, M. Bilal, M.S. Khan, S. ur Rehman, K. Ma, J. Wang, Z. Sheng</div>
+                    <div class="pub-journal">Ceramics International, 2021</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.6</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave biocarbon nano">
+                    <div class="pub-title">Microwave absorption property of coffee waste bio-carbon modified by industrial waste MnFe<sub>2</sub>O<sub>4</sub> particles</div>
+                    <div class="pub-authors">A. Hassan, W. Ding, M. A. Aslam, Y. Bian, Q. Liu, Z. Sheng</div>
+                    <div class="pub-journal">J. Mater. Res. Technol., 9, 12869–12879, 2020</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.6</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave composite">
+                    <div class="pub-title">Enhanced microwave absorption from the magnetic-dielectric interface: A hybrid rGO@Ni-doped MoS<sub>2</sub></div>
+                    <div class="pub-authors">W. Uddin, S. ur Rehman, M. A. Aslam, S. ur Rehman, M. Wu, M. Zhu</div>
+                    <div class="pub-journal">Mater. Res. Bull., 130, 110943, 2020</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.7</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="composite water">
+                    <div class="pub-title">Composite of strip-shaped ZIF-67 with polypyrrole: a conductive polymer-MOF electrode system for stable and high specific capacitance</div>
+                    <div class="pub-authors">S. ur Rehman, R. Ahmed, K. Ma, S. Xu, T. Tao, M. A. Aslam, M. Amir, J. Wang</div>
+                    <div class="pub-journal">Eng. Sci., 13, 71–78, 2020</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.6</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="microwave composite">
+                    <div class="pub-title">Carbonized zeolitic imidazolate framework-67/polypyrrole: A magnetic-dielectric interface for enhanced microwave absorption properties</div>
+                    <div class="pub-authors">S. ur Rehman, M. Sun, M. Xu, J. Liu, R. Ahmed, M. A. Aslam, R.A. Ahmad, H. Bi</div>
+                    <div class="pub-journal">J. Colloid Interface Sci., 574, 87–96, 2020</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 9.7</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="nano">
+                    <div class="pub-title">Transient Photoconductivity in LaRhO<sub>3</sub> Thin Film</div>
+                    <div class="pub-authors">M. Zhi, L. Shen, Z. Ma, M. A. Aslam, L. Xu, X. Xu, W. Zhu et al.</div>
+                    <div class="pub-journal">Chinese Physics Letters, 36(11), 117801, 2019</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 4.2</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="nano microwave">
+                    <div class="pub-title">Decrease in the Particle Size and Coercivity of Self-Assembled CoNi Nanoparticles Synthesized Under a Repulsive Magnetic Field</div>
+                    <div class="pub-authors">S. ur Rehman, R. Ahmed, J. Liu, J. Wang, M. Sun, Z. Fang, M.A. Aslam, P.C. Morais, C. Wang, H. Bi</div>
+                    <div class="pub-journal">Part. Part. Syst. Charact., 36, 1900047, 2019</div>
+                    <div class="pub-meta"><span class="pub-badge">IF: 3.0</span><span class="pub-badge">Q3</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="nano composite">
+                    <div class="pub-title">Electrical impedance functionality and spin orientation transformation of nanostructured Sr-substituted BaMnO<sub>3</sub> hexagonal perovskites</div>
+                    <div class="pub-authors">S. K. Abbas, M. A. Aslam, M. Amir, S. Atiq, Z. Ahmed, S. A. Siddiqi, S. Naseem</div>
+                    <div class="pub-journal">Journal of Alloys and Compounds, 712, 720-731, 2017</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.3</span><span class="pub-badge">Q1</span></div>
+                </div>
+
+                <!-- ================= VISUAL BREAK ================= -->
+                <div class="pub-divider"><span>Upcoming & Under Review</span></div>
+                <!-- ================================================ -->
+
+                <!-- ================= UPCOMING ARTICLES ================= -->
+                
+                <div class="pub-item" data-tags="co2 microwave">
+                    <div class="pub-title">Mechanistic insights into intrinsically enhanced performance of perovskite Solid oxide cells Carbon neutralization [Under Review]</div>
+                    <div class="pub-authors">M. A. Aslam, J. Liu, X. Z. Fu, J. L. Luo</div>
+                    <div class="pub-journal">Upcoming Article</div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 21.5</span><span class="pub-badge q1">Q1</span></div>
+                </div>
+
+                <div class="pub-item" data-tags="water nano">
+                    <div class="pub-title">Enhanced Bifunctional Electrocatalytic Activity of In Doped ZnBa-LDH for Efficient Overall Water Splitting [Writing]</div>
+                    <div class="pub-authors">M. A. Aslam, Wang Z. W, X. L. Nian, S. Atiq</div>
+                    <div class="pub-journal">Upcoming Article</div>
+                </div>
+
+                <div class="pub-item" data-tags="co2 nano">
+                    <div class="pub-title">Dual-Site Electronic Structure Engineering of Sr<sub>2</sub>Fe<sub>1.5</sub>Mo<sub>0.5</sub>O<sub>6-δ</sub> via Ce/Ni Co-Doping: From f-p-d Hybridization to Double-Exchange Spin Coupling [Writing]</div>
+                    <div class="pub-authors">M. A. Aslam, Wang Z. W, J. Liu, X. Z. Fu, J. L. Luo</div>
+                    <div class="pub-journal">Upcoming Article</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title fade-in">Get in Touch</h2>
+        <div class="contact-container fade-in">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong>Location</strong><br>
+                        Office 539, School of Material Science,<br>Shenzhen University, Shenzhen, China
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <strong>Email</strong><br>
+                        adnanbajwa93@mail.ustc.edu.cn
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <strong>Phone</strong><br>
+                        +86 185 6585 1345
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your message! This is a demo form.');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Muhammad Adnan Aslam. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        const keywordBtns = document.querySelectorAll('.keyword-btn');
+        const pubItems = document.querySelectorAll('.pub-item');
+
+        keywordBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                keywordBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                pubItems.forEach(item => {
+                    const tags = item.getAttribute('data-tags');
+                    if (filter === 'all' || tags.includes(filter)) {
+                        item.classList.remove('hidden');
+                        item.style.animation = 'none';
+                        item.offsetHeight; 
+                        item.style.animation = 'fadeIn 0.5s ease';
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
