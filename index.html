@@ -56,6 +56,30 @@
             margin-bottom: 1.5rem; display: block; margin-left: auto; margin-right: auto;
         }
 
+        /* Hero Stats Bar - NEW */
+        .hero-stats {
+            display: flex; justify-content: center; gap: 2rem;
+            margin: 1.5rem 0 2rem 0; flex-wrap: wrap;
+        }
+        .hero-stat {
+            background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem; border-radius: 12px;
+            border: 1px solid var(--bg-tertiary);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .hero-stat:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+        .hero-stat-number {
+            font-size: 1.5rem; font-weight: 700; color: var(--accent);
+            display: block;
+        }
+        .hero-stat-label {
+            font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .btn {
             display: inline-block; padding: 0.8rem 2rem; border-radius: 50px;
             background: var(--gradient); color: white; text-decoration: none;
@@ -81,10 +105,15 @@
         .stat-card {
             background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px;
             text-align: center; border: 1px solid var(--bg-tertiary); transition: transform 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .stat-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: var(--gradient);
         }
         .stat-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .stat-number { font-size: 2rem; font-weight: 700; color: var(--accent); }
-        .stat-label { color: var(--text-secondary); font-size: 0.9rem; }
+        .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--accent); margin-bottom: 0.3rem; }
+        .stat-label { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
 
         .research-photo-container { margin-top: 2rem; text-align: center; }
         .research-photo {
@@ -135,7 +164,6 @@
         }
         .pub-list { display: flex; flex-direction: column; gap: 1.5rem; text-align: left; }
         
-        /* Visual Break for Upcoming Articles */
         .pub-divider {
             display: flex; align-items: center; text-align: center; margin: 2rem 0 1rem 0;
             color: var(--text-secondary); font-size: 1.1rem; font-weight: 600; letter-spacing: 1px;
@@ -184,6 +212,9 @@
             .about-grid, .contact-container, .parallel-grid { grid-template-columns: 1fr; gap: 2rem; }
             .nav-links { display: none; }
             .profile-photo { width: 140px; height: 140px; }
+            .hero-stats { gap: 1rem; }
+            .hero-stat { padding: 0.6rem 1rem; }
+            .hero-stat-number { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -205,6 +236,23 @@
             <img src="images/profile.jpg" alt="Muhammad Adnan Aslam" class="profile-photo">
             <h1>Muhammad Adnan Aslam<br><span>Condensed Matter Physicist</span></h1>
             <p>Postdoctoral Researcher specializing in materials chemistry, electromagnetic wave absorption, electrochemical CO<sub>2</sub> reduction, and energy conversion.</p>
+            
+            <!-- NEW: Hero Stats Bar -->
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">~95.9</span>
+                    <span class="hero-stat-label">Total IF</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">11</span>
+                    <span class="hero-stat-label">h-index</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">716</span>
+                    <span class="hero-stat-label">Citations</span>
+                </div>
+            </div>
+
             <div>
                 <a href="#contact" class="btn">Get in Touch</a>
                 <a href="#footprint" class="btn btn-outline">Explore Research</a>
@@ -355,8 +403,6 @@
 
             <div class="pub-list">
                 
-                <!-- ================= PUBLISHED ARTICLES (Descending Order) ================= -->
-                
                 <div class="pub-item" data-tags="co2 nano">
                     <div class="pub-title">Unravelling the chemically constrained f-p-d stabilization of site-specific Ce-doped Sr<sub>2</sub>Fe<sub>1.5</sub>Mo<sub>0.5</sub>O<sub>6-δ</sub> for high-performance carbon dioxide reduction</div>
                     <div class="pub-authors">M. A. Aslam, J. Liu, W. Zhang, Y. Liao, J. Liu, L. Wang, J. Zhang, X. Z. Fu, J. L. Luo</div>
@@ -402,63 +448,63 @@
                     <div class="pub-title">Ammonium nitrate is a risk for environment: A case study of Beirut (Lebanon) chemical explosion and the effects on environment</div>
                     <div class="pub-authors">S. ur Rehman, R. Ahmed, M. Kun, S. Xu, M. A. Aslam, B. Hong, J. Liu, J. Wang</div>
                     <div class="pub-journal">Ecotoxicology and Environmental Safety, 210, 111834, 2021</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.1</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.1</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="microwave biocarbon">
                     <div class="pub-title">Low-cost 3D bio-carbon foams obtained from wheat straw with broadened bandwidth electromagnetic wave absorption performance</div>
                     <div class="pub-authors">M. A. Aslam, W. Ding, S. ur Rehman, A. Hassan, Y. Bian, Q. Liu, Z. Sheng</div>
                     <div class="pub-journal">Applied Surface Science, 543, 148785, 2021</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.9</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.9</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="microwave biocarbon composite">
                     <div class="pub-title">Dimensionality determined microwave absorption properties in Ferrite/Bio-carbon composites</div>
                     <div class="pub-authors">M. A. Aslam, Hu Kang, W. Ding, A. Hassan, Y. Bian, K. Qiu, Q. Liu, Z. Sheng</div>
                     <div class="pub-journal">Ceramics International, 47, 27496-27502, 2021</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.6</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.6</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="microwave composite">
                     <div class="pub-title">Modulating dielectric loss of MoS<sub>2</sub>@Ti<sub>3</sub>C<sub>2</sub>T<sub>x</sub> Nanoarchitectures for Electromagnetic Wave Absorption with radar cross section reduction</div>
                     <div class="pub-authors">A. Hassan, M. A. Aslam, M. Bilal, M.S. Khan, S. ur Rehman, K. Ma, J. Wang, Z. Sheng</div>
                     <div class="pub-journal">Ceramics International, 2021</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.6</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.6</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="microwave biocarbon nano">
                     <div class="pub-title">Microwave absorption property of coffee waste bio-carbon modified by industrial waste MnFe<sub>2</sub>O<sub>4</sub> particles</div>
                     <div class="pub-authors">A. Hassan, W. Ding, M. A. Aslam, Y. Bian, Q. Liu, Z. Sheng</div>
                     <div class="pub-journal">J. Mater. Res. Technol., 9, 12869–12879, 2020</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.6</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.6</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="microwave composite">
                     <div class="pub-title">Enhanced microwave absorption from the magnetic-dielectric interface: A hybrid rGO@Ni-doped MoS<sub>2</sub></div>
                     <div class="pub-authors">W. Uddin, S. ur Rehman, M. A. Aslam, S. ur Rehman, M. Wu, M. Zhu</div>
                     <div class="pub-journal">Mater. Res. Bull., 130, 110943, 2020</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.7</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 5.7</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="composite water">
                     <div class="pub-title">Composite of strip-shaped ZIF-67 with polypyrrole: a conductive polymer-MOF electrode system for stable and high specific capacitance</div>
                     <div class="pub-authors">S. ur Rehman, R. Ahmed, K. Ma, S. Xu, T. Tao, M. A. Aslam, M. Amir, J. Wang</div>
                     <div class="pub-journal">Eng. Sci., 13, 71–78, 2020</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.6</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.6</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="microwave composite">
                     <div class="pub-title">Carbonized zeolitic imidazolate framework-67/polypyrrole: A magnetic-dielectric interface for enhanced microwave absorption properties</div>
                     <div class="pub-authors">S. ur Rehman, M. Sun, M. Xu, J. Liu, R. Ahmed, M. A. Aslam, R.A. Ahmad, H. Bi</div>
                     <div class="pub-journal">J. Colloid Interface Sci., 574, 87–96, 2020</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 9.7</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 9.7</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="nano">
                     <div class="pub-title">Transient Photoconductivity in LaRhO<sub>3</sub> Thin Film</div>
                     <div class="pub-authors">M. Zhi, L. Shen, Z. Ma, M. A. Aslam, L. Xu, X. Xu, W. Zhu et al.</div>
                     <div class="pub-journal">Chinese Physics Letters, 36(11), 117801, 2019</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 4.2</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 4.2</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
                 <div class="pub-item" data-tags="nano microwave">
@@ -472,15 +518,11 @@
                     <div class="pub-title">Electrical impedance functionality and spin orientation transformation of nanostructured Sr-substituted BaMnO<sub>3</sub> hexagonal perovskites</div>
                     <div class="pub-authors">S. K. Abbas, M. A. Aslam, M. Amir, S. Atiq, Z. Ahmed, S. A. Siddiqi, S. Naseem</div>
                     <div class="pub-journal">Journal of Alloys and Compounds, 712, 720-731, 2017</div>
-                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.3</span><span class="pub-badge">Q1</span></div>
+                    <div class="pub-meta"><span class="pub-badge q1">IF: 6.3</span><span class="pub-badge q1">Q1</span></div>
                 </div>
 
-                <!-- ================= VISUAL BREAK ================= -->
                 <div class="pub-divider"><span>Upcoming & Under Review</span></div>
-                <!-- ================================================ -->
 
-                <!-- ================= UPCOMING ARTICLES ================= -->
-                
                 <div class="pub-item" data-tags="co2 microwave">
                     <div class="pub-title">Mechanistic insights into intrinsically enhanced performance of perovskite Solid oxide cells Carbon neutralization [Under Review]</div>
                     <div class="pub-authors">M. A. Aslam, J. Liu, X. Z. Fu, J. L. Luo</div>
