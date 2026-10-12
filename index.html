@@ -98,23 +98,13 @@
             width: 60px; height: 3px; background: var(--gradient); border-radius: 2px;
         }
 
-        /* About & Stats */
-        .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
+        /* About Section (Updated to be full width) */
+        .about-grid { display: block; max-width: 900px; margin: 0 auto; text-align: left; }
         .about-text { color: var(--text-secondary); font-size: 1.05rem; }
-        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .stat-card {
-            background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px;
-            text-align: center; border: 1px solid var(--bg-tertiary); transition: transform 0.3s;
-            position: relative; overflow: hidden;
-        }
-        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient); }
-        .stat-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--accent); margin-bottom: 0.3rem; }
-        .stat-label { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
 
         .research-photo-container { margin-top: 2rem; text-align: center; }
         .research-photo {
-            width: 100%; max-width: 500px; border-radius: 12px;
+            width: 100%; max-width: 600px; border-radius: 12px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); border: 2px solid var(--bg-tertiary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -233,7 +223,7 @@
 
         @media (max-width: 900px) {
             .hero-content h1 { font-size: 2.5rem; }
-            .about-grid, .contact-container, .parallel-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .contact-container, .parallel-grid { grid-template-columns: 1fr; gap: 2rem; }
             .nav-links { display: none; }
             .profile-photo { width: 140px; height: 140px; }
             .hero-stats { gap: 1rem; }
@@ -263,7 +253,7 @@
             <h1>Muhammad Adnan Aslam<br><span>Condensed Matter Physicist</span></h1>
             <p>Postdoctoral Researcher specializing in materials chemistry, electromagnetic wave absorption, electrochemical CO<sub>2</sub> reduction, and energy conversion.</p>
             
-            <!-- UPDATED: Stats with Markers for GitHub Action Automation -->
+            <!-- Stats Bar (Only appears here now) -->
             <div class="hero-stats">
                 <div class="hero-stat">
                     <span class="hero-stat-number">~95.9</span>
@@ -311,22 +301,6 @@
                 <div class="research-photo-container">
                     <img src="images/research.jpg" alt="Current Research Work" class="research-photo">
                     <p class="photo-caption">Current research on double perovskite-based reversible solid oxide cells and electrochemical CO<sub>2</sub> reduction at Shenzhen University</p>
-                </div>
-            </div>
-            
-            <!-- UPDATED: Stats with Markers for GitHub Action Automation -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">~95.9</div>
-                    <div class="stat-label">Total Impact Factor</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number"><!-- HINDEX_START -->11<!-- HINDEX_END --></div>
-                    <div class="stat-label">h-index</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number"><!-- CITATIONS_START -->716<!-- CITATIONS_END --></div>
-                    <div class="stat-label">Total Citations</div>
                 </div>
             </div>
         </div>
@@ -425,7 +399,7 @@
                 <span class="conf-badge poster">Poster</span>
                 <div class="conf-title">"Low-cost 3D bio-carbon foams obtained from wheat straw with broadened bandwidth electromagnetic wave absorption performance"</div>
                 <div class="conf-event">Asia-Pacific Conference on Research in High Magnetic Fields</div>
-                <div class="conf-location">📍 High Field Laboratory for Superconducting Material, Tokyo, Japan</div>
+                <div class="conf-location"> High Field Laboratory for Superconducting Material, Tokyo, Japan</div>
                 <div class="conf-year">2020</div>
             </div>
 
@@ -465,7 +439,7 @@
                 <span class="conf-badge">Conference</span>
                 <div class="conf-title">International Conference on Material Science and Nanotechnology (ICMSN’2016)</div>
                 <div class="conf-event">Academic Conference</div>
-                <div class="conf-location">📍 University of Lahore, Lahore, Pakistan</div>
+                <div class="conf-location"> University of Lahore, Lahore, Pakistan</div>
                 <div class="conf-year">2016</div>
             </div>
 
